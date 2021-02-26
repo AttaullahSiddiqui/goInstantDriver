@@ -1,0 +1,51 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title [ngClass]="profile.is_online==1 ? 'active' : ''">
+			<div class="title_inner d-flex">
+				<span class="offline">{{'you_are_offline' | translate}}</span>
+				<span class="online">{{'you_are_online' | translate}}</span>
+
+				<div class="online_offline_button online end" (click)="toggleOnline()">
+					{{'go_online' | translate}}
+				</div>
+
+				<div class="online_offline_button offline end" (click)="toggleOnline()">
+					{{'go_offline' | translate}}
+				</div>
+			</div>
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+	<div #map id="map" class="map">
+		<!-- <ion-spinner></ion-spinner> -->
+	</div>
+	<div #pleaseConnect id="please-connect">
+		<!-- <p>{{'loading' | translate}}</p> -->
+	</div>
+</ion-content>
+
+<ion-footer class="ion-no-border" [ngClass]="profile.is_online==1 ? 'active' : ''">
+	<div class="all_delivery">
+		<ion-row class="ion-text-center">
+			<ion-col size="4">
+				<h2>{{insightsOrder.orders_count}}</h2>
+				<h3>{{'orders' | translate}}</h3>
+			</ion-col>
+			<ion-col size="4">
+				<h2>{{insightsOrder.distance_travelled}} {{distance_metric | translate}}</h2>
+				<h3>{{'ride' | translate}}</h3>
+			</ion-col>
+			<ion-col size="4">
+				<h2>{{currency_icon}}{{insightsOrder.earnings}}</h2>
+				<h3>{{'earnings' | translate}}</h3>
+			</ion-col>
+		</ion-row>
+	</div>
+
+	<ion-button size="large" expand="full" class="btn" (click)="checkDeliveryRequest()">{{'check_delivery' | translate}}</ion-button>
+</ion-footer>

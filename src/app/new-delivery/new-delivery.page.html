@@ -1,0 +1,153 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            <div class="d-flex ">
+                <span>{{'new_delivery_task' | translate}}({{'order_id' | translate}}{{order_request.order.id}})</span>
+
+                <!--
+                <div class="order_info_button end" (click)="toggleFab()">
+                    <span class="info">
+                        <ion-icon class="zmdi zmdi-shopping-basket ion-text-start"></ion-icon>
+                        {{'order_info' | translate}}
+                    </span>
+                    <span class="cloes">
+                        <ion-icon class="zmdi zmdi-close ion-text-start"></ion-icon>
+                        {{'cloes' | translate}}
+                    </span>
+                </div>
+-->
+            </div>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+    <!-- <div class="order_info" [ngClass]="fabAction ? 'active' : ''">
+        <div class="item_container">
+            <div class="item d-flex">
+                <h2>Veg Sandwich</h2>
+                <p class="d-flex">
+                    <span class="continuity">1</span>
+                    <span class="end">$ 3.00</span>
+                </p>
+            </div>
+            <div class="item d-flex">
+                <h2>Fride Chicken</h2>
+                <p class="d-flex">
+                    <span class="continuity">1</span>
+                    <span class="end">$ 4.50</span>
+                </p>
+            </div>
+            <div class="item d-flex">
+                <h2>Watermelon Juice</h2>
+                <p class="d-flex">
+                    <span class="continuity">1</span>
+                    <span class="end">$ 2.50</span>
+                </p>
+            </div>
+            <div class="item d-flex">
+                <h2>Veg Sandwich</h2>
+                <p class="d-flex">
+                    <span class="continuity">1</span>
+                    <span class="end">$ 3.00</span>
+                </p>
+            </div>
+            <div class="item d-flex">
+                <h2>Fride Chicken</h2>
+                <p class="d-flex">
+                    <span class="continuity">1</span>
+                    <span class="end">$ 4.50</span>
+                </p>
+            </div>
+            <div class="item d-flex">
+                <h2>Watermelon Juice</h2>
+                <p class="d-flex">
+                    <span class="continuity">1</span>
+                    <span class="end">$ 2.50</span>
+                </p>
+            </div>
+        </div>
+        <div class="payment_detail">
+            <h2 class="d-flex">
+                Cash on Delivery
+                <span class="end ion-text-end">$ 11.50</span>
+            </h2>
+        </div>
+    </div> -->
+
+    <div #map id="map" class="map">
+        <!-- <ion-spinner></ion-spinner> -->
+    </div>
+    <div #pleaseConnect id="please-connect">
+        <!-- <p>{{'loading' | translate}}</p> -->
+    </div>
+</ion-content>
+<ion-footer class="ion-no-border">
+    <ion-card>
+        <div class="card_header d-flex">
+
+            <div class="text_box">
+                <h2 class="d-flex">
+                    <ion-icon class="zmdi zmdi-bike ion-text-start"></ion-icon>{{distanceToShow}}
+                    {{distance_metric | translate}} <span>&nbsp;({{durationToShow}})</span>
+                </h2>
+            </div>
+
+
+
+            <div class="direction end" (click)="navRequest()">
+                <ion-icon class="zmdi zmdi-navigation ion-text-start"></ion-icon>
+                {{'direction' | translate}}
+            </div>
+
+
+        </div>
+        <div class="delivery_details">
+            <div class="delivery_address d-flex">
+                <ion-icon class="zmdi zmdi-pin ion-text-start"></ion-icon>
+                <div class="text_box">
+                    <h2>{{order_request.order.vendor.name}}</h2>
+                    <p>{{order_request.order.vendor.address}}</p>
+                </div>
+
+
+                <!--
+                <div class="iocn_box end d-flex">
+                    <ion-icon class="zmdi zmdi-comment-alt-text ion-text-end"></ion-icon>
+                    <ion-icon class="zmdi zmdi-phone ion-text-end end"></ion-icon>
+                </div>
+-->
+            </div>
+            <div class="dotted">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="delivery_address d-flex">
+                <ion-icon class="zmdi zmdi-navigation ion-text-start"></ion-icon>
+                <div class="text_box">
+                    <h2>{{order_request.order.user.name}}</h2>
+                    <p>{{order_request.order.address.formatted_address}}</p>
+                </div>
+
+                <!--
+                <div class="iocn_box end d-flex">
+                    <ion-icon class="zmdi zmdi-phone ion-text-end end"></ion-icon>
+                </div>
+-->
+
+            </div>
+        </div>
+    </ion-card>
+    <ion-col size="6">
+        <ion-button size="large" shape="full" class="btn" (click)="confirmUpdate('accepted')">
+            {{'accept' | translate}}
+        </ion-button>
+    </ion-col>
+
+    <ion-col size="6">
+        <ion-button size="large" shape="full" class="btn danger" (click)="confirmUpdate('rejected')">
+            {{'reject' | translate}}
+        </ion-button>
+    </ion-col>
+</ion-footer>

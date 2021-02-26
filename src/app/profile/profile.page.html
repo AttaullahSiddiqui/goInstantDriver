@@ -1,0 +1,121 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            {{'edit_profile' | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="bg_color" fullscreen>
+    <ion-list lines="none">
+        <ion-item class="feature_image">
+            <div class="item_inner">
+                <h2> {{'feature_image' | translate}}</h2>
+                <div class="d-flex" style="align-items: flex-start;">
+                    <div class="img_box center_img">
+                        <img *ngIf="profile.user && profile.user.image_url" [src]="profile.user.image_url" class="crop_img">
+                        <img *ngIf="!profile.user || !profile.user.image_url" src="assets/images/empty_dp.png" class="crop_img">
+                    </div>
+                    <h3 class="d-flex" (click)="pickImageUser()">
+                        <ion-icon class="zmdi zmdi-camera ion-text-start"></ion-icon>
+                        {{'upload_photo' | translate}}
+                    </h3>
+                </div>
+            </div>
+        </ion-item>
+
+        <div class="form">
+            <h2>{{'profile_info' | translate}}</h2>
+
+            <ion-item lines="none">
+                <div class="item_inner d-flex">
+                    <div class="input_box">
+                        <ion-label mode="md" position="stacked">{{"full_name" | translate}}</ion-label>
+                        <ion-input mode="md" type="text" placeholder="" [(ngModel)]="profile.user.name"></ion-input>
+                    </div>
+                </div>
+            </ion-item>
+
+            <ion-item lines="none">
+                <div class="item_inner d-flex">
+                    <div class="input_box">
+                        <ion-label mode="md" position="stacked">{{"gender" | translate}}</ion-label>
+                        <div class="d-flex" style="align-items: flex-end;">
+                            <ion-select interface="popover" [(ngModel)]="profile.meta.gender">
+                                <ion-select-option value="male">{{'male' | translate}}</ion-select-option>
+                                <ion-select-option value="female">{{'female' | translate}}</ion-select-option>
+                                <ion-select-option value="other">{{'other' | translate}}</ion-select-option>
+                            </ion-select>
+                            <ion-icon class="zmdi zmdi-chevron-down ion-text-end end"></ion-icon>
+                        </div>
+                    </div>
+                </div>
+            </ion-item>
+
+            <ion-item lines="none">
+                <div class="item_inner d-flex">
+                    <div class="input_box">
+                        <ion-label mode="md" position="stacked">{{"phone_number" | translate}}</ion-label>
+                        <ion-input mode="md" disabled="true" readonly [(ngModel)]="profile.user.mobile_number"></ion-input>
+                    </div>
+                </div>
+            </ion-item>
+
+            <ion-item lines="none">
+                <div class="item_inner d-flex">
+                    <div class="input_box">
+                        <ion-label mode="md" position="stacked">{{"email_address" | translate}}</ion-label>
+                        <ion-input mode="md" disabled="true" readonly [(ngModel)]="profile.user.email"></ion-input>
+                    </div>
+                </div>
+            </ion-item>
+        </div>
+
+
+        <div class="form documentation">
+            <h2>{{'documentation' | translate}}</h2>
+            <ion-item  [ngClass]="(profile.meta.document_verified) ? 'active' : ''">
+                <div class="item_inner d-flex">
+                    <ion-icon [ngClass]="(profile.meta.document_verified) ? 'zmdi zmdi-shield-check ion-text-start' : 'zmdi zmdi-assignment-alert ion-text-start'"></ion-icon>
+                    <div class="text_box">
+                        <h3>{{'goverment_id' | translate}}</h3>
+                        <h4 class="d-flex" (click)="pickImageProfile()">
+							<span
+								*ngIf="profile.meta.document_url && profile.meta.document_url.length"
+								class="id_details">
+								{{ 'uploaded' | translate}}
+							</span>
+							<span *ngIf="!(profile.meta.document_url && profile.meta.document_url.length)"
+								class="id_details">
+								{{ 'not_uploaded_yet' | translate}}
+							</span>
+							<span
+								class="end ion-text-end">{{ (profile.meta.document_url && profile.meta.document_url.length?'reupload':'upload') | translate}}</span>
+						</h4>
+                    </div>
+                </div>
+            </ion-item>
+
+            <!-- <ion-item>
+                <div class="item_inner d-flex">
+                    <ion-icon class="zmdi zmdi-assignment-alert ion-text-start"></ion-icon>
+                    <div class="text_box">
+                        <h3>{{'goverment_id' | translate}}</h3>
+                        <h4 class="d-flex">
+                            <span class="id_details">{{'not_uploaded_yet' | translate}}</span>
+                            <span class="end ion-text-end">{{'upload' | translate}}</span>
+                        </h4>
+                    </div>
+                </div>
+            </ion-item> -->
+        </div>
+    </ion-list>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+    <ion-button size="large" expand="full" class="btn" (click)="update()">{{'update_info' | translate}}</ion-button>
+</ion-footer>
